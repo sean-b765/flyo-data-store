@@ -1,0 +1,254 @@
+@import './queries';
+
+$progress-gradient: linear-gradient(
+	45deg,
+	hsl(6, 100%, 80%),
+	hsl(335, 100%, 65%)
+);
+
+$pale-blue: hsl(243, 100%, 93%);
+$gray-blue: hsl(229, 7%, 55%);
+$dark-blue: hsl(228, 56%, 26%);
+$darker-blue: hsl(229, 57%, 11%);
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 400;
+	box-sizing: border-box;
+}
+
+body,
+html {
+	height: 100vh;
+	width: 100vw;
+	background: $darker-blue;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.image {
+	position: absolute;
+	height: 50%;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	background: url('../images/bg-desktop.png');
+	background-position: center !important;
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+
+	@include mobile {
+		background: url('../images/bg-mobile.png');
+		height: 100%;
+	}
+}
+
+.container,
+.attribution {
+	z-index: 2;
+}
+.attribution {
+	position: absolute;
+	top: 20px;
+	color: white;
+}
+
+.container {
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	flex-direction: row;
+	max-width: 1200px;
+	width: 80vw;
+	height: auto;
+
+	&__header,
+	&__overview {
+		border-radius: 10px;
+		padding: 3rem;
+		color: white;
+		margin-right: 30px;
+		background: $dark-blue;
+	}
+
+	&__header {
+		border-top-right-radius: 100px;
+		display: flex;
+		flex-direction: column;
+		padding-right: 8rem;
+		width: 40%;
+		max-width: 350px;
+
+		&__title {
+			font-size: 2rem;
+		}
+		&__controls {
+			margin-top: 2rem;
+			display: flex;
+			flex-direction: row;
+
+			&__control {
+				width: 48px;
+				height: 48px;
+				background: $darker-blue;
+				border-radius: 10px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-right: 10px;
+
+				> img {
+					padding: 10px;
+				}
+			}
+		}
+	}
+
+	&__overview {
+		position: relative;
+		width: 60%;
+
+		&__notif {
+			padding: 0.7rem 1.5rem;
+			position: absolute;
+			right: 3rem;
+			bottom: 100%;
+			transform: translateY(40%);
+			color: rgb(19, 19, 19);
+			border-radius: 10px 10px 0 10px;
+			background: white;
+			font-weight: 700;
+			font-size: 2.8rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			span {
+				font-size: 0.8rem;
+				margin-left: 10px;
+				font-weight: 700;
+				opacity: 0.5;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: 1px;
+				right: 0;
+				width: 0;
+				height: 0;
+				transform: translateY(100%);
+				border: 20px solid transparent;
+				border-top-color: #ffffff;
+				border-bottom: 0;
+				border-right: 0;
+			}
+		}
+
+		&__text {
+			color: rgba(255, 255, 255, 0.719);
+			margin-bottom: 15px;
+			opacity: 0.8;
+
+			span {
+				color: white;
+				font-weight: 700;
+			}
+		}
+
+		&__bar {
+			position: relative;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+
+			&__progress {
+				position: relative;
+				width: 100%;
+				height: 22px;
+				border-radius: 20px;
+				margin-bottom: 10px;
+				background: $darker-blue;
+				padding: 3px;
+
+				&__indicator {
+					position: relative;
+					width: 81.5%;
+					height: 100%;
+					border-radius: 25px;
+					background: $progress-gradient;
+
+					&::after {
+						position: absolute;
+						content: '';
+						width: 12px;
+						height: 12px;
+						background: white;
+						border-radius: 25px;
+						right: 2px;
+						top: 2px;
+					}
+				}
+			}
+
+			&__range {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				width: 100%;
+				p {
+					font-weight: 700;
+					opacity: 0.8;
+				}
+			}
+		}
+	}
+
+	@include mobile {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		&__header,
+		&__overview {
+			margin-right: 0;
+			width: 100%;
+			max-width: none;
+		}
+		&__header {
+			margin-bottom: 30px;
+		}
+
+		&__overview {
+			&__notif {
+				border-radius: 10px;
+				margin: auto;
+				bottom: 0;
+				right: 0;
+				left: 50%;
+				transform: translate(-50%, 70%);
+				font-size: 2rem;
+
+				&::after {
+					content: none;
+				}
+			}
+		}
+	}
+
+	@include mobile-sm {
+		width: 100%;
+		padding-inline: 10px;
+
+		&__header,
+		&__overview {
+			padding: 2rem;
+		}
+	}
+}
